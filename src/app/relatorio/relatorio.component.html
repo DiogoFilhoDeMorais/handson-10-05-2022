@@ -1,0 +1,11 @@
+<div class="endereco" *ngIf="endereco?.city; else NaoMostrar">
+  Nome da cidade: {{ endereco.city }}
+  <br>
+  Sigla do Estado: {{ endereco.state }}
+  <br>
+  <button (click)="clear()">Limpar</button>
+</div>
+
+<ng-template #NaoMostrar>
+  <span class="endereco">Execute uma busca válida!</span>
+</ng-template>

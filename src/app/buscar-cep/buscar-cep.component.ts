@@ -9,15 +9,30 @@ import { BuscarCepService } from '../services/buscar-cep.service';
 export class BuscarCepComponent implements OnInit {
 
   endereco: any = null;
+  campoDeBuscas: any;
 
   constructor(private buscar: BuscarCepService) { }
 
   ngOnInit(): void {
-    this.buscar.buscarEndereco('76400-000').subscribe(
+    this.campoDeBuscas = document.getElementById('campoDeBuscas');
+  }
+
+  search(): void {
+    const cep = this.campoDeBuscas.value;
+
+    this.buscar.buscarEndereco(cep).subscribe(
       resposta => {
         this.endereco = resposta;
+      },
+      erro => {
+        this.endereco = null;
       }
     );
+  }
+
+  clear(): void {
+    this.endereco = null;
+    console.log('A variável no componente pai recebeu NULO');
   }
 
 }
